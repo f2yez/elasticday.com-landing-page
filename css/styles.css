@@ -399,6 +399,86 @@ body {
     color: #111827;
 }
 
+/* ===== PRIVACY & TERMS PAGE STYLES ===== */
+.content-section {
+    max-width: 980px;
+    margin: 48px auto;
+    background: #ffffff;
+    padding: 36px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.06);
+    color: #374151;
+}
+
+.section__title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 18px;
+}
+
+.privacy, .terms-of-use {
+    background: transparent;
+}
+
+.content-section p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: #374151;
+    margin-bottom: 12px;
+}
+
+.content-section a {
+    color: #0073ea;
+    text-decoration: underline;
+}
+
+.content-section h1,
+.content-section h2,
+.content-section h3 {
+    color: #0f172a;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.content-section ul,
+.content-section ol {
+    margin-left: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.content-section li {
+    margin-bottom: 8px;
+}
+
+.privacy .footer, .terms-of-use .footer, .page-footer {
+    background: #0f172a;
+    color: #fff;
+}
+
+/* subtle callout box used for legal highlights */
+.legal-callout {
+    background: linear-gradient(180deg, #fffbeb, #ffffff);
+    border-left: 4px solid #f59e0b;
+    padding: 16px 18px;
+    border-radius: 8px;
+    margin: 14px 0 20px 0;
+    color: #92400e;
+}
+
+/* small-print */
+.fine-print {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+@media (max-width: 900px) {
+    .content-section { padding: 28px 20px; margin: 28px 16px; }
+    .section__title { font-size: 24px; }
+    .cover-title { font-size: 34px; }
+}
+
+
 .testimonial-title {
     font-size: 12px;
     color: #6b7280;
