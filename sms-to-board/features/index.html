@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New – SMS to Board Features | SMS Inbox & Item View Conversation</title>
+    <meta name="description" content="Discover the latest features in SMS to Board for Monday.com — the SMS Inbox and Item View Conversation that bring your SMS communication fully inside your workflow.">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        html { scroll-behavior: smooth; }
+
+        /* ── New-feature hero badge ── */
+        .new-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #0073ea, #0060b9);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 999px;
+        }
+
+        /* ── Section divider ── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 48px 0 32px;
+        }
+        .section-divider h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            white-space: nowrap;
+        }
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, #e2e8f0, transparent);
+        }
+
+        /* ── Feature hero cards (large) ── */
+        .feature-hero {
+            border-radius: 18px;
+            padding: 40px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-hero--blue {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1.5px solid #93c5fd;
+        }
+        .feature-hero--purple {
+            background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%);
+            border: 1.5px solid #c4b5fd;
+        }
+        .feature-hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 40px;
+            align-items: center;
+        }
+        .feature-hero-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .feature-hero-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .feature-hero-icon--blue  { background: linear-gradient(135deg, #0073ea22, #0073ea44); }
+        .feature-hero-icon--purple { background: linear-gradient(135deg, #7c3aed22, #7c3aed44); }
+        .feature-hero h3 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .feature-hero p {
+            font-size: 16px;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .feature-hero-bullets {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        .feature-hero-bullets li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: #374151;
+        }
+        .feature-hero-bullets li span.bullet-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            margin-top: 1px;
+        }
+        .bullet-icon--blue   { background: #dbeafe; color: #0073ea; }
+        .bullet-icon--purple { background: #ede9fe; color: #7c3aed; }
+
+        /* ── Screen mockup card ── */
+        .mockup-card {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        }
+        .mockup-card-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+        }
+        .mockup-card-bar--blue   { background: linear-gradient(135deg, #0073ea, #0060b9); }
+        .mockup-card-bar--purple { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+        .mockup-card-bar span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+        .mockup-card-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            margin-left: auto;
+        }
+        .mockup-card-body {
+            padding: 18px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .mockup-msg {
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+        }
+        .mockup-msg--in {
+            background: #f3f4f6;
+            color: #374151;
+            align-self: flex-start;
+            max-width: 90%;
+        }
+        .mockup-msg--out {
+            background: linear-gradient(135deg, #0073ea, #0060b9);
+            color: #fff;
+            align-self: flex-end;
+            max-width: 85%;
+        }
+        .mockup-msg-meta {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 3px;
+        }
+        .mockup-inbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+        }
+        .mockup-inbox-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0073ea, #0060b9);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .mockup-inbox-name  { font-weight: 600; color: #111827; font-size: 12px; }
+        .mockup-inbox-preview { color: #6b7280; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+        .mockup-inbox-time  { margin-left: auto; font-size: 10px; color: #9ca3af; flex-shrink: 0; }
+        .mockup-unread {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #0073ea;
+            flex-shrink: 0;
+        }
+
+        /* ── Capability cards grid ── */
+        .cap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 24px 0;
+        }
+        .cap-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .cap-card-icon {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .cap-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+        .cap-card p {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ── Timeline / changelog ── */
+        .changelog {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            padding-left: 32px;
+        }
+        .changelog::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: linear-gradient(to bottom, #0073ea, #7c3aed);
+            border-radius: 2px;
+        }
+        .changelog-item {
+            position: relative;
+            padding: 0 0 28px 20px;
+        }
+        .changelog-item:last-child { padding-bottom: 0; }
+        .changelog-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 7px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0073ea;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #0073ea;
+        }
+        .changelog-date {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #0073ea;
+            margin-bottom: 4px;
+        }
+        .changelog-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        .changelog-desc {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* ── CTA section ── */
+        .cta-section {
+            background: linear-gradient(135deg, #0073ea 0%, #0060b9 50%, #004a8f 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: #fff;
+            margin-top: 32px;
+        }
+        .cta-section h3 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .cta-section p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 32px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .btn-cta-primary {
+            display: inline-block;
+            background: #fff;
+            color: #0073ea;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .btn-cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .btn-cta-outline {
+            display: inline-block;
+            background: transparent;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .btn-cta-outline:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* ── Setup steps ── */
+        .setup-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 8px 0 0;
+        }
+        .setup-step {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 0 24px;
+            align-items: stretch;
+            position: relative;
+        }
+        .setup-step-num-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .setup-step-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 800;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        .setup-step-num--blue   { background: #0073ea; color: #fff; }
+        .setup-step-num--purple { background: #7c3aed; color: #fff; }
+        .setup-step-line {
+            width: 2px;
+            flex: 1;
+            min-height: 24px;
+            margin-top: 4px;
+        }
+        .setup-step-line--blue   { background: linear-gradient(to bottom, #0073ea44, #0073ea11); }
+        .setup-step-line--purple { background: linear-gradient(to bottom, #7c3aed44, #7c3aed11); }
+        .setup-step:last-child .setup-step-line { display: none; }
+        .setup-step-body {
+            padding-bottom: 36px;
+        }
+        .setup-step:last-child .setup-step-body { padding-bottom: 0; }
+        .setup-step-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #111827;
+            margin: 8px 0 6px;
+        }
+        .setup-step-desc {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.7;
+            margin: 0 0 16px;
+        }
+        .setup-step-tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            background: #eff6ff;
+            border-left: 3px solid #0073ea;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+        .setup-step-tip--purple {
+            background: #faf5ff;
+            border-left-color: #7c3aed;
+        }
+        .setup-step-img {
+            width: 100%;
+            max-width: 860px;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            display: block;
+            margin: 0 auto;
+        }
+        .setup-step-img-caption {
+            font-size: 11px;
+            color: #9ca3af;
+            text-align: center;
+            margin-top: 7px;
+            font-style: italic;
+        }
+
+        @media (max-width: 900px) {
+            .feature-hero-inner { grid-template-columns: 1fr; }
+            .cap-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .cap-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STICKY NAVIGATION HEADER -->
+    <header class="header" id="main-nav">
+        <a href="../../" class="logo">📱 SMS to Board</a>
+        <nav class="nav-links">
+            <a href="../">Overview</a>
+            <a href="../#features">Features</a>
+            <a href="../#demo-video">Demo</a>
+            <a href="../#getting-started">Get Started</a>
+            <a href="../#pricing">Pricing</a>
+            <a href="https://auth.monday.com/oauth2/authorize?client_id=f4a7f98a116df2e235b9e208f9df3a07&response_type=install"
+                target="_blank" class="cta-nav">Install →</a>
+        </nav>
+    </header>
+
+    <!-- COVER PAGE -->
+    <div class="cover-page">
+        <div class="cover-badge">✨ Latest Release — June 2026</div>
+        <div class="cover-icon">🚀</div>
+        <h1 class="cover-title">What's New</h1>
+        <p class="cover-subtitle">Two powerful new features that bring your SMS conversations fully inside monday.com — so your team can manage every message without leaving their workspace.</p>
+        <div style="display:flex;gap:14px;margin-top:16px;justify-content:center;flex-wrap:wrap;">
+            <a href="#sms-inbox" style="background:rgba(255,255,255,0.15);color:#fff;padding:11px 24px;border-radius:8px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);">💬 SMS Inbox</a>
+            <a href="#item-view" style="background:rgba(255,255,255,0.15);color:#fff;padding:11px 24px;border-radius:8px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);">🗂️ Item View Conversation</a>
+        </div>
+    </div>
+
+    <!-- PAGE 1: SMS INBOX -->
+    <div class="page" id="sms-inbox">
+        <div class="page-header">
+            <div class="page-header-icon">💬</div>
+            <h2>SMS Inbox</h2>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+            <span class="new-badge">✦ New Feature</span>
+            <span style="font-size:13px;color:#6b7280;">Released June 2026</span>
+        </div>
+
+        <p class="intro-text">
+            The SMS Inbox gives your team a single, organised view of every incoming and outgoing SMS message across all your reserved numbers — directly inside monday.com. No switching tabs, no missed messages.
+        </p>
+
+        <!-- Feature hero card -->
+        <div class="feature-hero feature-hero--blue">
+            <div class="feature-hero-inner">
+                <div>
+                    <div class="feature-hero-label">
+                        <div class="feature-hero-icon feature-hero-icon--blue">💬</div>
+                        <span class="new-badge">New</span>
+                    </div>
+                    <h3>One Inbox for All Your SMS Numbers</h3>
+                    <p>Every SMS thread — across every reserved phone number — is consolidated into a single, searchable inbox. Assign threads to team members, filter by status, and reply without ever leaving monday.com.</p>
+                    <ul class="feature-hero-bullets">
+                        <li>
+                            <span class="bullet-icon bullet-icon--blue">✓</span>
+                            Unified inbox for all reserved numbers in your workspace
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--blue">✓</span>
+                            Reply directly to any SMS thread from the inbox
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--blue">✓</span>
+                            Real-time delivery and read status per message
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--blue">✓</span>
+                            Search, filter, and sort by sender, date, or status
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--blue">✓</span>
+                            Every thread automatically linked to its board item
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--blue">✓</span>
+                            New message notifications inside monday.com
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Inbox mockup -->
+                <div class="mockup-card">
+                    <div class="mockup-card-bar mockup-card-bar--blue">
+                        <span>SMS Inbox</span>
+                        <div class="mockup-card-dot"></div>
+                    </div>
+                    <div class="mockup-card-body">
+                        <div class="mockup-inbox-row" style="background:#eff6ff;border-color:#93c5fd;">
+                            <div class="mockup-unread"></div>
+                            <div class="mockup-inbox-avatar">JD</div>
+                            <div style="min-width:0;">
+                                <div class="mockup-inbox-name">+1 (555) 234-5678</div>
+                                <div class="mockup-inbox-preview">Hi, I need help with my account…</div>
+                            </div>
+                            <div class="mockup-inbox-time">2m</div>
+                        </div>
+                        <div class="mockup-inbox-row">
+                            <div style="width:8px;height:8px;flex-shrink:0;"></div>
+                            <div class="mockup-inbox-avatar" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">MK</div>
+                            <div style="min-width:0;">
+                                <div class="mockup-inbox-name">+1 (555) 345-6789</div>
+                                <div class="mockup-inbox-preview">Thank you for the quick response!</div>
+                            </div>
+                            <div class="mockup-inbox-time">15m</div>
+                        </div>
+                        <div class="mockup-inbox-row">
+                            <div style="width:8px;height:8px;flex-shrink:0;"></div>
+                            <div class="mockup-inbox-avatar" style="background:linear-gradient(135deg,#059669,#047857);">AL</div>
+                            <div style="min-width:0;">
+                                <div class="mockup-inbox-name">+44 20 9876 5432</div>
+                                <div class="mockup-inbox-preview">When will maintenance finish?</div>
+                            </div>
+                            <div class="mockup-inbox-time">1h</div>
+                        </div>
+                        <div class="mockup-inbox-row">
+                            <div style="width:8px;height:8px;flex-shrink:0;"></div>
+                            <div class="mockup-inbox-avatar" style="background:linear-gradient(135deg,#d97706,#b45309);">SR</div>
+                            <div style="min-width:0;">
+                                <div class="mockup-inbox-name">+1 (555) 567-8901</div>
+                                <div class="mockup-inbox-preview">I'd like to schedule a product demo</div>
+                            </div>
+                            <div class="mockup-inbox-time">2h</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Capability cards -->
+        <div class="section-divider">
+            <h3>What the SMS Inbox Enables</h3>
+        </div>
+
+        <div class="cap-grid">
+            <div class="cap-card">
+                <div class="cap-card-icon">🔍</div>
+                <h4>Smart Search & Filters</h4>
+                <p>Find any message instantly by phone number, keyword, date range, or read/unread status.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">↩️</div>
+                <h4>In-App Reply</h4>
+                <p>Respond to any SMS thread directly from the inbox without switching to another tool or app.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">🔗</div>
+                <h4>Board Item Linking</h4>
+                <p>Every inbox thread is automatically linked to its corresponding monday.com board item.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">📊</div>
+                <h4>Multi-Number View</h4>
+                <p>See all messages across every reserved number in one unified list, or filter by a specific number.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">🔔</div>
+                <h4>Live Notifications</h4>
+                <p>Get notified immediately when a new message arrives. Never miss a customer reply again.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">📈</div>
+                <h4>Read & Delivery Status</h4>
+                <p>Track delivery confirmation and read receipts for every outbound message you send.</p>
+            </div>
+        </div>
+
+        <!-- Setup steps: SMS Inbox -->
+        <div class="section-divider">
+            <h3>How to Set Up &amp; Use the SMS Inbox</h3>
+        </div>
+
+        <div class="setup-steps">
+
+            <!-- Step 1 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--blue">1</div>
+                    <div class="setup-step-line setup-step-line--blue"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Open your board and click the <em>Board SMS Inbox</em> tab</div>
+                    <p class="setup-step-desc">From any monday.com board that has SMS to Board installed, click the <strong>Board SMS Inbox</strong> view tab at the top of your board. This opens the inbox panel for that board.</p>
+                    <div class="setup-step-tip">💡 If you don't see the tab yet, add the view by clicking <strong>+</strong> next to your board views and selecting <strong>Board SMS Inbox</strong> from the installed apps.</div>
+                    <figure style="margin:0;">
+                        <img src="../../img/image-1780474800860.png" alt="Board SMS Inbox tab and main inbox view showing contacts list and conversation" class="setup-step-img" />
+                        <figcaption class="setup-step-img-caption">The SMS Inbox view — contacts on the left, conversation thread on the right</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--blue">2</div>
+                    <div class="setup-step-line setup-step-line--blue"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Browse and select a contact to open their thread</div>
+                    <p class="setup-step-desc">The left panel lists all contacts (senders) who have sent a message to any of your reserved numbers. Each contact shows their phone number, latest message preview, and time. Click any contact to open the full conversation thread on the right.</p>
+                    <div class="setup-step-tip">💡 Use the <strong>Search contacts…</strong> box at the top to instantly find a contact by name or phone number.</div>
+                    <figure style="margin:0;">
+                        <img src="../../img/image-1780474800860.png" alt="Contacts sidebar showing multiple contacts with message previews and timestamps" class="setup-step-img" />
+                        <figcaption class="setup-step-img-caption">Contacts panel — latest message preview, activity time, and tags per contact</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--blue">3</div>
+                    <div class="setup-step-line setup-step-line--blue"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Filter contacts by category</div>
+                    <p class="setup-step-desc">Use the <strong>Categories</strong> dropdown at the top of the contacts panel to filter by category tags such as Support, Sales, Billing, VIP, and more. This lets your team focus only on the conversations that matter to them.</p>
+                    <figure style="margin:0;">
+                        <img src="../../img/image-1780474821470.png" alt="Categories dropdown filter showing options: New, Support, Sales, Billing, Delivery, VIP, Other" class="setup-step-img" />
+                        <figcaption class="setup-step-img-caption">Category filter — quickly segment contacts by department or priority</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--blue">4</div>
+                    <div class="setup-step-line setup-step-line--blue"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Edit contact details — name, tags &amp; description</div>
+                    <p class="setup-step-desc">Click <strong>Contact details</strong> at the top right of any open conversation to open the contact editor. You can set a display name, assign category tags, and add a free-text description. Click <strong>Save</strong> when done.</p>
+                    <div class="setup-step-tip">💡 Giving contacts a display name (e.g. <em>Support Worker</em>) makes them easy to identify across the inbox and in search results.</div>
+                    <figure style="margin:0;">
+                        <img src="../../img/image-1780474812688.png" alt="Contact details modal with fields for phone number, display name, tags, and description" class="setup-step-img" />
+                        <figcaption class="setup-step-img-caption">Contact details modal — add a name, tags, and notes to any contact</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--blue">5</div>
+                    <div class="setup-step-line setup-step-line--blue"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Reply to a conversation</div>
+                    <p class="setup-step-desc">With a conversation open, type your reply in the <strong>Write a reply…</strong> box at the bottom of the thread. Click <strong>Send SMS</strong> to deliver your message immediately. The reply appears in the thread as a sent message with a read/delivery indicator.</p>
+                    <div class="setup-step-tip">💡 The character counter (0 / 1600) shows how much of your message quota you're using. Standard SMS is 160 characters; long messages are split and stitched automatically.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>SMS to Board for Monday.com</span>
+            <span>New Features — Page 1 of 3</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: ITEM VIEW CONVERSATION -->
+    <div class="page" id="item-view">
+        <div class="page-header">
+            <div class="page-header-icon">🗂️</div>
+            <h2>Item View Conversation</h2>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+            <span class="new-badge" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">✦ New Feature</span>
+            <span style="font-size:13px;color:#6b7280;">Released June 2026</span>
+        </div>
+
+        <p class="intro-text">
+            Open any board item and see its complete SMS conversation history — every message sent and received — in a clean, threaded view right inside the item. Context lives where the work lives.
+        </p>
+
+        <!-- Feature hero card -->
+        <div class="feature-hero feature-hero--purple">
+            <div class="feature-hero-inner">
+                <div>
+                    <div class="feature-hero-label">
+                        <div class="feature-hero-icon feature-hero-icon--purple">🗂️</div>
+                        <span class="new-badge" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">New</span>
+                    </div>
+                    <h3>Full Conversation History Inside Every Item</h3>
+                    <p>When you open a monday.com item created from an SMS, you'll now see the complete message thread — all replies, all history — displayed in a clean chat-style view. Jump from data to conversation without switching context.</p>
+                    <ul class="feature-hero-bullets">
+                        <li>
+                            <span class="bullet-icon bullet-icon--purple">✓</span>
+                            Threaded SMS history displayed inside the board item
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--purple">✓</span>
+                            Send a reply directly from the item view
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--purple">✓</span>
+                            Full conversation context alongside your item columns
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--purple">✓</span>
+                            Timestamps and sender details for every message
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--purple">✓</span>
+                            Synced in real-time — new replies appear immediately
+                        </li>
+                        <li>
+                            <span class="bullet-icon bullet-icon--purple">✓</span>
+                            Works with all existing and future board items
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Conversation mockup -->
+                <div class="mockup-card">
+                    <div class="mockup-card-bar mockup-card-bar--purple">
+                        <span>Item: Support Request #001</span>
+                        <div class="mockup-card-dot"></div>
+                    </div>
+                    <div class="mockup-card-body">
+                        <div style="font-size:10px;color:#9ca3af;text-align:center;padding:4px 0;">Today, 10:24 AM</div>
+                        <div class="mockup-msg mockup-msg--in">
+                            Hi, I need help with my account setup. Can someone assist me?
+                            <div class="mockup-msg-meta">+1 (555) 234-5678 · 10:24 AM</div>
+                        </div>
+                        <div class="mockup-msg mockup-msg--out">
+                            Hi! Of course — I'll look into your account right now. Give me 2 minutes.
+                            <div class="mockup-msg-meta" style="color:rgba(255,255,255,0.6);">You · 10:26 AM · ✓✓ Read</div>
+                        </div>
+                        <div class="mockup-msg mockup-msg--in">
+                            Thank you! Really appreciate the quick response.
+                            <div class="mockup-msg-meta">+1 (555) 234-5678 · 10:27 AM</div>
+                        </div>
+                        <div style="display:flex;gap:8px;margin-top:4px;">
+                            <input style="flex:1;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12px;outline:none;" placeholder="Reply to this thread…" />
+                            <button style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Capability cards -->
+        <div class="section-divider">
+            <h3>What Item View Conversation Enables</h3>
+        </div>
+
+        <div class="cap-grid">
+            <div class="cap-card">
+                <div class="cap-card-icon">🧵</div>
+                <h4>Threaded History</h4>
+                <p>Every SMS exchange displayed chronologically in a clean chat thread — no fragmented messages.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">⚡</div>
+                <h4>Instant Context</h4>
+                <p>Open an item and immediately understand the full customer conversation without digging through logs.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">✍️</div>
+                <h4>Reply from the Item</h4>
+                <p>Send an SMS reply directly from within the board item — no need to navigate back to the inbox.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">🔄</div>
+                <h4>Real-Time Sync</h4>
+                <p>New incoming messages appear in the item conversation instantly, keeping the thread always current.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">🕐</div>
+                <h4>Full Timestamps</h4>
+                <p>Every message is stamped with exact date and time, building a complete, auditable communication log.</p>
+            </div>
+            <div class="cap-card">
+                <div class="cap-card-icon">📋</div>
+                <h4>Works with All Items</h4>
+                <p>The conversation panel appears on every item linked to an SMS number — no extra setup needed.</p>
+            </div>
+        </div>
+
+        <!-- Setup steps: Item View Conversation -->
+        <div class="section-divider">
+            <h3>How to Set Up &amp; Use Item View Conversation</h3>
+        </div>
+
+        <div class="setup-steps">
+
+            <!-- Step 1 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--purple">1</div>
+                    <div class="setup-step-line setup-step-line--purple"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Go to the Reserved Numbers dashboard and click <em>Edit</em> on a number</div>
+                    <p class="setup-step-desc">Open the <strong>SMS &amp; Numbers Dashboard</strong> and navigate to the <strong>Reserved Numbers</strong> tab. Find the phone number you want to configure and click <strong>Edit</strong> to open the Edit Phone Number modal.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--purple">2</div>
+                    <div class="setup-step-line setup-step-line--purple"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Enable <em>conversation view</em> and configure column mapping</div>
+                    <p class="setup-step-desc">Inside the Edit modal, scroll down to the <strong>Column Mapping</strong> section. Map your SMS fields to board columns (Sender, Text, Date, Attachments). Then check the <strong>Enable conversation view</strong> checkbox to activate threaded conversations inside item views.</p>
+                    <div class="setup-step-tip setup-step-tip--purple">💡 When conversation view is enabled, follow-up SMS from the same phone number will be <strong>added to the existing item's conversation</strong> instead of creating a new board item every time.</div>
+                    <figure style="margin:0;">
+                        <img src="../../img/image-1780474836545.png" alt="Edit Phone Number modal showing column mapping fields and Enable conversation view checkbox ticked" class="setup-step-img" />
+                        <figcaption class="setup-step-img-caption">Edit Phone Number modal — enable conversation view and map columns, then click Save Changes</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--purple">3</div>
+                    <div class="setup-step-line setup-step-line--purple"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Open a board item and click the <em>SMS thread</em> tab</div>
+                    <p class="setup-step-desc">Navigate to your board and open any item that was created from an incoming SMS. Inside the item view, click the <strong>SMS thread</strong> tab (next to Updates, Files, and Activity Log). The full conversation history for that contact will load immediately.</p>
+                    <div class="setup-step-tip setup-step-tip--purple">💡 The SMS thread tab shows the phone number, status (Active/Inactive), provider, message count, and a Refresh button at the top of the panel.</div>
+                    <figure style="margin:0;">
+                        <img src="../../img/image-1780474786674.png" alt="Monday.com item view with SMS thread tab selected, showing conversation history and reply box" class="setup-step-img" />
+                        <figcaption class="setup-step-img-caption">SMS thread tab inside a board item — full conversation history with reply box at the bottom</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="setup-step">
+                <div class="setup-step-num-col">
+                    <div class="setup-step-num setup-step-num--purple">4</div>
+                    <div class="setup-step-line setup-step-line--purple"></div>
+                </div>
+                <div class="setup-step-body">
+                    <div class="setup-step-title">Read the conversation context and reply directly</div>
+                    <p class="setup-step-desc">The conversation panel shows every incoming and outgoing message in chronological order, grouped by date. Attachments (images, files) are displayed inline. Type your reply in the <strong>Write a reply…</strong> box and click <strong>Send SMS</strong> to respond to the customer without leaving the item.</p>
+                    <div class="setup-step-tip setup-step-tip--purple">💡 Attachments sent via SMS (such as images) are shown inline in the thread and also automatically uploaded to monday.com Files if you mapped an Attachments column.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Changelog / release timeline -->
+        <div class="section-divider">
+            <h3>Release Notes</h3>
+        </div>
+
+        <div class="changelog">
+            <div class="changelog-item">
+                <div class="changelog-date">June 2026</div>
+                <div class="changelog-title">SMS Inbox — General Availability</div>
+                <div class="changelog-desc">Unified inbox for all reserved numbers, with search, filtering, in-app reply, and board item linking. Available to all plans.</div>
+            </div>
+            <div class="changelog-item">
+                <div class="changelog-date">June 2026</div>
+                <div class="changelog-title">Item View Conversation — General Availability</div>
+                <div class="changelog-desc">Threaded SMS conversation history displayed inside every monday.com board item. Includes real-time sync and direct reply capability.</div>
+            </div>
+            <div class="changelog-item">
+                <div class="changelog-date">Previously</div>
+                <div class="changelog-title">Reserved Numbers Management Dashboard</div>
+                <div class="changelog-desc">Manage, activate, and configure your reserved SMS numbers from a central dashboard with workspace linking and status tracking.</div>
+            </div>
+            <div class="changelog-item">
+                <div class="changelog-date">Previously</div>
+                <div class="changelog-title">Automatic Board Item Creation from SMS</div>
+                <div class="changelog-desc">Every incoming SMS automatically creates a board item with sender number, message text, and timestamp mapped to your columns.</div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h3>Ready to Try the New Features?</h3>
+            <p>Install SMS to Board and get the SMS Inbox and Item View Conversation included — no extra setup required.</p>
+            <div class="cta-buttons">
+                <a href="https://auth.monday.com/oauth2/authorize?client_id=f4a7f98a116df2e235b9e208f9df3a07&response_type=install"
+                    target="_blank" class="btn-cta-primary">Install on Monday.com →</a>
+                <a href="../" class="btn-cta-outline">View Full Documentation</a>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>SMS to Board for Monday.com</span>
+            <span>New Features — Page 3 of 3</span>
+        </div>
+    </div>
+
+</body>
+</html>
